@@ -1,0 +1,8 @@
+{
+  "extends": "@delphi/tsconfig/base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+  },
+  "include": ["src", "../../apps/telweb/src/components/WebRTC/hooks/useBrowserAction.tsx"],
+  "exclude": ["node_modules"]
+}

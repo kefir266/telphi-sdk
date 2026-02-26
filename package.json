@@ -1,0 +1,41 @@
+{
+  "name": "@delphi/webrtc-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build:browser": "node build.browser.mjs",
+    "build:browser:ci": "node build.browser.mjs --minify-only",
+    "build:browser:watch": "node build.browser.mjs --watch",
+    "clean": "rm -rf .turbo node_modules dist",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint \"*.{js,mjs,ts}\" \"src/**/*.{js,jsx,ts,tsx}\" --no-error-on-unmatched-pattern --cache --cache-location \"node_modules/.cache/.eslintcache\"",
+    "lint:fix": "eslint \"*.{js,mjs,ts}\" \"src/**/*.{js,jsx,ts,tsx}\" --fix --no-error-on-unmatched-pattern --cache --cache-location \"node_modules/.cache/.eslintcache\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@delphi/validation": "workspace:^0.1.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "7.3.8",
+    "@mui/material": "7.3.8",
+    "@mui/system": "7.3.8",
+    "zustand": "^5.0.11"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@delphi/eslint-config": "workspace:^0.3.0",
+    "@delphi/prettier-config": "workspace:^0.1.0",
+    "@delphi/tsconfig": "workspace:^0.1.0",
+    "@types/react": "^19.2.13",
+    "esbuild": "^0.27.3",
+    "typescript": "^5.9.3"
+  },
+  "prettier": "@delphi/prettier-config"
+}
