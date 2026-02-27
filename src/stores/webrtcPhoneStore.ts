@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 
 import type { IceServer, PersistedCallState, WebRTCConfig, InitiateCallParams } from '../types'
-import { clearCallState, getDerivedUrls, loadCallState, logDebug } from '../utils'
+import { clearCallState, getDerivedUrls, loadCallState, logDebug, setlogger } from '../utils'
 /**
  * UI-related state for the WebRTC phone
  */
@@ -378,7 +378,10 @@ export const useWebRTCPhoneStore = create<IWebRTCPhoneStore>()(
             janusUrl: undefined,
             iceServers: undefined,
         },
-        setWebRTCConfig: (config) => set({ webrtcConfig: config }),
+        setWebRTCConfig: (config) => {
+            setlogger(config.logger)
+            set({ webrtcConfig: config })
+        },
 
         // WebRTC phone call initiation
         pendingCall: null,

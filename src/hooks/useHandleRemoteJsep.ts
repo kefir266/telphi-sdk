@@ -1,5 +1,5 @@
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { logDebug } from '../utils'
+import { logDebug, logger } from '../utils'
 
 import { useAddIceCandidate } from './useAddCandidate'
 
@@ -29,7 +29,7 @@ export const useHandleRemoteJsep = () => {
                 }
             }
         } catch (e) {
-            console.error('Error setting remote description:', e)
+            logger.error('Error setting remote description:', e)
         }
     }
 }

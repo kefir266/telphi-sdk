@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
-import { logDebug, playDtmfTone } from '../utils'
+import { logDebug, playDtmfTone, logger } from '../utils'
 
 import { useSendMessage } from './useSendMessage'
 
@@ -31,7 +31,7 @@ export const useSendDtmf = () => {
                     },
                 })
             } catch (e) {
-                console.error('DTMF failed:', e)
+                logger.error('DTMF failed:', e)
             }
         },
         [appendDtmfDigit, inCall, sendMessage],

@@ -30,6 +30,17 @@ export type IceServer = {
 }
 
 /**
+ * Logger interface for SDK log output.
+ * Matches the subset of `console` used by the SDK.
+ */
+export interface Logger {
+    debug: (...args: unknown[]) => void
+    info: (...args: unknown[]) => void
+    warn: (...args: unknown[]) => void
+    error: (...args: unknown[]) => void
+}
+
+/**
  * WebRTC configuration passed to the SDK
  */
 export interface WebRTCConfig {
@@ -44,6 +55,8 @@ export interface WebRTCConfig {
     apiUrl?: string // Optional full API URL (overrides apiDomain if provided)
     janusUrl?: string // Optional full Janus URL (overrides apiDomain if provided)
     iceServers?: Array<IceServer>
+    /** Optional logger. Defaults to `console`. */
+    logger?: Logger
 }
 
 /**

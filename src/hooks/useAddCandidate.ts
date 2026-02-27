@@ -1,5 +1,5 @@
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { logDebug } from '../utils'
+import { logDebug, logger } from '../utils'
 
 // Add a single ICE candidate to the PeerConnection
 export const useAddIceCandidate = () => {
@@ -21,7 +21,7 @@ export const useAddIceCandidate = () => {
                 logDebug('Remote ICE gathering complete')
             }
         } catch (e) {
-            console.error('Error adding remote ICE candidate:', e)
+            logger.error('Error adding remote ICE candidate:', e)
         }
     }
 }

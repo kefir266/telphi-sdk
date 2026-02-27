@@ -1,6 +1,6 @@
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { logDebug, saveCallState } from '../utils'
+import { logDebug, saveCallState, logger } from '../utils'
 
 import { useInitJanus } from './useInitJanus'
 import { useRequestCallToken } from './useRequestCallToken'
@@ -36,7 +36,7 @@ export const useInitializeForCall = () => {
             const errorMsg = 'API key not configured. Set TELAPI_KEY environment variable.'
             logDebug('No API key, cannot get call token')
             setStatus(`Failed: ${errorMsg}`)
-            console.error(errorMsg)
+            logger.error(errorMsg)
             return
         }
 
@@ -73,7 +73,7 @@ export const useInitializeForCall = () => {
                 )
             }
         } catch (error) {
-            console.error('Failed to prepare call:', error)
+            logger.error('Failed to prepare call:', error)
             setStatus(`Failed: ${error instanceof Error ? error.message : 'Unknown'}`)
             setCalling(false)
         }

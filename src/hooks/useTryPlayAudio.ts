@@ -1,6 +1,6 @@
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { logDebug } from '../utils'
+import { logDebug, logger } from '../utils'
 
 // Try to play remote audio, track if blocked by autoplay policy
 export const useTryPlayAudio = () => {
@@ -20,7 +20,7 @@ export const useTryPlayAudio = () => {
                 logDebug('Audio playback blocked - needs user interaction')
                 setAudioBlocked(true)
             } else {
-                console.error('Audio playback failed:', error)
+                logger.error('Audio playback failed:', error)
             }
         }
     }

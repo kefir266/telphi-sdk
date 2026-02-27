@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { loadCallState, logDebug, randomString, saveCallState } from '../utils'
+import { loadCallState, logDebug, randomString, saveCallState, logger } from '../utils'
 
 import { useHandleMessage } from './useHandleMessage'
 import { useSendMessage } from './useSendMessage'
@@ -66,7 +66,7 @@ export const useInitJanus = () => {
                     resolve()
                 }
                 ws.onerror = (err) => {
-                    console.error('WebSocket error:', err)
+                    logger.error('WebSocket error:', err)
                     clearTimeout(timeout)
                     reject(new Error('Connection failed'))
                 }
@@ -76,7 +76,7 @@ export const useInitJanus = () => {
                 try {
                     handleMessage(JSON.parse(e.data))
                 } catch (err) {
-                    console.error('Parse error:', err)
+                    logger.error('Parse error:', err)
                 }
             }
 
@@ -133,7 +133,7 @@ export const useInitJanus = () => {
             initializedRef.current = true
             initializingRef.current = false
         } catch (error) {
-            console.error('Init failed:', error)
+            logger.error('Init failed:', error)
             setStatus(`Failed: ${error instanceof Error ? error.message : 'Unknown'}`)
             initializingRef.current = false
         }

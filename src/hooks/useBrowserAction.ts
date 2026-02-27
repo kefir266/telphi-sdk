@@ -1,7 +1,6 @@
 import { useCallback } from 'react'
 
-import type { WebRTCPhoneProps } from '@delphi/webrtc-sdk'
-
+import type { WebRTCPhoneProps } from '../types'
 import { logDebug } from '../utils'
 
 // Action handler for browser actions from ARI (AI tool calls)

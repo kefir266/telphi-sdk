@@ -2,7 +2,7 @@ import { PersistedCallState } from '../types'
 
 import { CALL_STATE_STORAGE_KEY } from './constants'
 
-import { logDebug } from './index'
+import { logDebug, logger } from './index'
 
 // Save call state to sessionStorage
 export const saveCallState = (state: PersistedCallState) => {
@@ -10,7 +10,7 @@ export const saveCallState = (state: PersistedCallState) => {
         sessionStorage.setItem(CALL_STATE_STORAGE_KEY, JSON.stringify(state))
         logDebug('Call state saved:', state)
     } catch (e) {
-        console.error('Failed to save call state:', e)
+        logger.error('Failed to save call state:', e)
     }
 }
 
@@ -30,7 +30,7 @@ export const loadCallState = (): PersistedCallState | null => {
         logDebug('Call state loaded:', state)
         return state
     } catch (e) {
-        console.error('Failed to load call state:', e)
+        logger.error('Failed to load call state:', e)
         return null
     }
 }
@@ -41,6 +41,6 @@ export const clearCallState = () => {
         sessionStorage.removeItem(CALL_STATE_STORAGE_KEY)
         logDebug('Call state cleared')
     } catch (e) {
-        console.error('Failed to clear call state:', e)
+        logger.error('Failed to clear call state:', e)
     }
 }

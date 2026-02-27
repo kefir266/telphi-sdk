@@ -1,4 +1,4 @@
-import { logDebug } from './index'
+import { logDebug, logger } from './index'
 
 // Configure audio codec preferences on RTCPeerConnection
 // This forces the browser to use PCMA (G.711 A-law) instead of Opus
@@ -47,6 +47,6 @@ export const setAudioCodecPreferences = (pc: RTCPeerConnection, preferPcma: bool
             logDebug('PCMA codec not available in browser capabilities')
         }
     } catch (e) {
-        console.warn('Failed to set codec preferences:', e)
+        logger.warn('Failed to set codec preferences:', e)
     }
 }

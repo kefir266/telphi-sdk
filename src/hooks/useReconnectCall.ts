@@ -1,7 +1,7 @@
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
 import { webrtcRefs } from '../stores/webrtcRefsStore'
 import { PersistedCallState } from '../types'
-import { logDebug, randomString, setAudioCodecPreferences, clearCallState } from '../utils'
+import { logDebug, randomString, setAudioCodecPreferences, clearCallState, logger } from '../utils'
 
 import { useCleanupCall } from './useCleanupCall'
 import { useSendMessage } from './useSendMessage'
@@ -141,7 +141,7 @@ export const useReconnectCall = () => {
             }
             setCalling(true)
         } catch (error) {
-            console.error('Reconnect failed:', error)
+            logger.error('Reconnect failed:', error)
             setStatus(`Reconnect failed: ${error instanceof Error ? error.message : 'Unknown'}`)
             clearCallState()
             cleanupCall()

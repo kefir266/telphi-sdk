@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { useWebRTCPhoneStore } from './stores/webrtcPhoneStore'
 import type { WebRTCConfig } from './types'
+import { logger } from './utils'
 
 export type { WebRTCConfig }
 
@@ -14,7 +15,7 @@ export function WebRTCConfigInit({ config }: { config: WebRTCConfig }) {
     const setCallData = useWebRTCPhoneStore((state) => state.setCallData)
 
     useEffect(() => {
-        console.log('[WebRTCConfigInit] Setting config:', {
+        logger.debug('[WebRTCConfigInit] Setting config:', {
             apiDomain: config.apiDomain,
             hasApiKey: !!config.apiKey,
             apiUrl: config.apiUrl,

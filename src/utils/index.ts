@@ -1,3 +1,5 @@
+import { logger } from './sdkLogger'
+
 export { playDtmfTone } from './playDtmfTone'
 export { getDerivedUrls } from './getDerivedUrl'
 export { animationStyles } from './animation'
@@ -5,8 +7,10 @@ export { setAudioCodecPreferences } from './setAudioCodecPreferences'
 export { CALL_STATE_STORAGE_KEY } from './constants'
 export { saveCallState, loadCallState, clearCallState } from './callState'
 
-// Simple logger for debug visibility
-export const logDebug = (...args: unknown[]) => console.debug('[WebRTCPhone]', ...args)
+export { logger }
+
+// Debug logger — routes through the configured SDK logger
+export const logDebug = (...args: unknown[]) => logger.debug('[WebRTCPhone]', ...args)
 
 // Generate random transaction ID
 export const randomString = (len: number) => {

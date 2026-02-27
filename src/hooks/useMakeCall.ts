@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react'
 
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { logDebug, randomString, saveCallState, setAudioCodecPreferences } from '../utils'
+import { logDebug, randomString, saveCallState, setAudioCodecPreferences, logger } from '../utils'
 
 import { useCleanupCall } from './useCleanupCall'
 import { useRequestCallToken } from './useRequestCallToken'
@@ -102,7 +102,7 @@ export const useMakeCall = () => {
                         telproDomain: tokenResponse.telproDomain || undefined,
                     })
                 } catch (tokenError) {
-                    console.warn('Failed to get call token, proceeding without:', tokenError)
+                    logger.warn('Failed to get call token, proceeding without:', tokenError)
                 }
             } else {
                 logDebug('Using existing call ID:', callId)
@@ -186,7 +186,7 @@ export const useMakeCall = () => {
                 jsep: { type: offer.type, sdp: offer.sdp },
             })
         } catch (error) {
-            console.error('Call failed:', error)
+            logger.error('Call failed:', error)
             setCalling(false)
             setCurrentCallId(null)
             setCurrentWsToken(null)

@@ -1,6 +1,6 @@
 import { useWebRTCPhoneStore } from '../stores/webrtcPhoneStore'
 import { webrtcRefs } from '../stores/webrtcRefsStore'
-import { logDebug } from '../utils'
+import { logDebug, logger } from '../utils'
 
 // Enable audio on user interaction (click)
 export const useEnableAudio = () => {
@@ -16,7 +16,7 @@ export const useEnableAudio = () => {
             logDebug('Audio enabled after user interaction')
             setAudioBlocked(false)
         } catch (error) {
-            console.error('Failed to enable audio:', error)
+            logger.error('Failed to enable audio:', error)
         }
     }
 }

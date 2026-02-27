@@ -11,6 +11,7 @@ export type {
     InitiateCallParams,
     PersistedCallState,
     CallTokenResponse,
+    Logger,
 } from './types'
 
 // Phone Store (internal state - exposed for advanced use cases)

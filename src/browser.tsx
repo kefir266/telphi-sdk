@@ -17,12 +17,13 @@
  * </script>
  */
 
-import React from 'react'
+import * as React from 'react'
 
-import ReactDOM from 'react-dom/client'
+import * as ReactDOM from 'react-dom/client'
 
 import { useWebRTCPhoneStore } from './stores/webrtcPhoneStore'
 import type { InitiateCallParams, WebRTCConfig } from './types'
+import { logger } from './utils'
 import { WebRTCConfigInit } from './WebRTCConfigInit'
 import { WebRTCPhone } from './WebRTCPhone'
 
@@ -51,7 +52,7 @@ function mount(selector: string | Element, options: MountOptions): void {
     const el = typeof selector === 'string' ? document.querySelector(selector) : selector
 
     if (!el) {
-        console.error(`[DelphiWebRTC] mount(): element not found — "${selector}"`)
+        logger.error(`[DelphiWebRTC] mount(): element not found — "${selector}"`)
         return
     }
 

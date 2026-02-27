@@ -27,7 +27,8 @@ import type {
     StatusPayload,
     ControlPayload,
     ResponseMode,
-} from '@delphi/validation'
+} from '../channelTypes'
+import { logger } from '../utils'
 import {
     createChatMessage,
     createActionResultMessage,
@@ -41,7 +42,7 @@ import {
     createContextUpdateMessage,
     createTextChatMessage,
     createReadAloudMessage,
-} from '@delphi/validation'
+} from '../utils/channel'
 
 // Connection states
 export type ConnectionState = 'disconnected' | 'connecting' | 'connected' | 'reconnecting'
@@ -237,7 +238,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
             if (!mountedRef.current) return
             setLastError(error)
             onError?.(error)
-            console.error('[CallChannel] Error:', error)
+            logger.error('[CallChannel] Error:', error)
         },
         [onError],
     )
@@ -268,7 +269,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
             try {
                 message = JSON.parse(event.data)
             } catch (error) {
-                console.error('[CallChannel] Failed to parse message:', error)
+                logger.error('[CallChannel] Failed to parse message:', error)
                 return
             }
 
@@ -380,7 +381,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
     // Connect to WebSocket
     const connect = useCallback(() => {
         if (!callId || !wsToken) {
-            console.debug('[CallChannel] Missing callId or wsToken, cannot connect')
+            logger.debug('[CallChannel] Missing callId or wsToken, cannot connect')
             return
         }
 
@@ -412,7 +413,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
 
             ws.onopen = () => {
                 if (!mountedRef.current) return
-                console.debug('[CallChannel] Connected')
+                logger.debug('[CallChannel] Connected')
                 updateConnectionState('connected')
                 setLastError(null)
 
@@ -435,7 +436,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
 
             ws.onclose = (event) => {
                 if (!mountedRef.current) return
-                console.debug('[CallChannel] Disconnected:', event.code, event.reason)
+                logger.debug('[CallChannel] Disconnected:', event.code, event.reason)
 
                 // Clear ping timer
                 if (pingTimerRef.current) {
@@ -463,7 +464,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
                     updateConnectionState('reconnecting')
                     reconnectTimerRef.current = setTimeout(() => {
                         if (mountedRef.current) {
-                            console.debug('[CallChannel] Attempting reconnection...')
+                            logger.debug('[CallChannel] Attempting reconnection...')
                             connectRef.current?.()
                         }
                     }, reconnectDelay)
@@ -473,7 +474,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
             }
 
             ws.onerror = (event) => {
-                console.error('[CallChannel] WebSocket error:', event)
+                logger.error('[CallChannel] WebSocket error:', event)
                 handleError(new Error('WebSocket connection error'))
             }
         } catch (error) {
@@ -697,7 +698,7 @@ export function useCallChannel(options: UseCallChannelOptions): UseCallChannelRe
                 setMessages([])
             })
             lastMessageIdRef.current = null
-            console.debug('[CallChannel] New call detected, clearing messages')
+            logger.debug('[CallChannel] New call detected, clearing messages')
         }
 
         if (callId && wsToken) {

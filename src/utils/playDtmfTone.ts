@@ -1,4 +1,5 @@
 import { DTMF_FREQUENCIES } from './constants'
+import { logger } from './logger'
 
 // Audio context for DTMF tones (lazy initialized)
 let audioContext: AudioContext | null = null
@@ -51,6 +52,6 @@ export const playDtmfTone = (digit: string, durationMs: number = 150) => {
         gainNode.gain.setValueAtTime(0.1, now)
         gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration)
     } catch (e) {
-        console.warn('Failed to play DTMF tone:', e)
+        logger.warn('Failed to play DTMF tone:', e)
     }
 }

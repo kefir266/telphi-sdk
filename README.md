@@ -34,7 +34,6 @@ The following are **bundled** (no need to install separately):
 
 - `@mui/material`, `@mui/icons-material`, `@mui/system` — phone UI
 - `zustand` — state management
-- `@delphi/validation` — channel message types
 
 ---
 
