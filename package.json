@@ -1,12 +1,15 @@
 {
-  "name": "@delphi/webrtc-sdk",
+  "name": "@delphi/telphi-sdk",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "exports": {
     ".": "./src/index.ts"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build:browser": "node build.browser.mjs",
     "build:browser:ci": "node build.browser.mjs --minify-only",

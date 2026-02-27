@@ -1,4 +1,4 @@
-# @delphi/webrtc-sdk
+# @delphi/telphi-sdk
 
 A self-contained React SDK for embedding a WebRTC softphone powered by [Janus Gateway](https://janus.conf.meetecho.com/). Ships with a pre-built phone UI (MUI) and a Zustand store for call initiation. Drop it into any React 18+ / Next.js application.
 
