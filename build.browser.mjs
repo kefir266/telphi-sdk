@@ -61,7 +61,7 @@ const sharedConfig = {
     },
     // Silence 'use client' directives (they're Next.js-only — no-op in browser bundle)
     banner: {
-        js: '/* @delphi/webrtc-sdk browser bundle — https://github.com/kombinat/itk-ai-assistant */',
+        js: '/* @kefir266/telphi-sdk browser bundle — https://github.com/kefir266/telphi-sdk */',
     },
     plugins: [
         {
@@ -133,12 +133,12 @@ async function watch(minify, outfile) {
 }
 
 async function main() {
-    console.log('Building @delphi/webrtc-sdk browser bundle...')
+    console.log('Building @kefir266/telphi-sdk browser bundle...')
 
     if (watchMode) {
         const contexts = []
         if (!minifyOnly) {
-            contexts.push(await watch(false, join(OUT_DIR, 'webrtc-sdk.iife.js')))
+            contexts.push(await watch(false, join(OUT_DIR, 'telphi-sdk.iife.js')))
         }
         contexts.push(await watch(true, join(OUT_DIR, 'webrtc-sdk.iife.min.js')))
 

@@ -2,7 +2,8 @@ import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 
 import type { IceServer, PersistedCallState, WebRTCConfig, InitiateCallParams } from '../types'
-import { clearCallState, getDerivedUrls, loadCallState, logDebug, setlogger } from '../utils'
+import { clearCallState, getDerivedUrls, loadCallState, logDebug } from '../utils'
+import { setlogger } from '../utils/sdkLogger'
 /**
  * UI-related state for the WebRTC phone
  */

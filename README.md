@@ -42,7 +42,7 @@ The following are **bundled** (no need to install separately):
 Inside the monorepo (pnpm workspace):
 
 ```bash
-pnpm add @delphi/webrtc-sdk --filter <your-app>
+pnpm add @kefir/telphi-sdk --filter <your-app>
 ```
 
 Or add to `package.json` directly:
@@ -50,7 +50,7 @@ Or add to `package.json` directly:
 ```json
 {
   "dependencies": {
-    "@delphi/webrtc-sdk": "workspace:^0.1.0"
+    "@kefir/telphi-sdk": "workspace:^0.1.0"
   }
 }
 ```
@@ -67,7 +67,7 @@ Place `<WebRTCConfigInit>` high in your component tree (e.g. root layout). It re
 
 ```tsx
 // app/layout.tsx  (Next.js App Router example)
-import { WebRTCConfigInit } from "@delphi/webrtc-sdk";
+import { WebRTCConfigInit } from "@kefir/telphi-sdk";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -91,7 +91,7 @@ Place `<WebRTCPhone>` once per application (typically in an authenticated layout
 
 ```tsx
 // app/(authenticated)/layout.tsx
-import { WebRTCPhone } from "@delphi/webrtc-sdk";
+import { WebRTCPhone } from "@kefir/telphi-sdk";
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -108,7 +108,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
 Call `initiateCall` from the SDK store in any component:
 
 ```tsx
-import { useWebRTCSdkStore } from "@delphi/webrtc-sdk";
+import { useWebRTCSdkStore } from "@kefir/telphi-sdk";
 
 export function CallButton({
   endpointId,
@@ -135,7 +135,7 @@ If your target environment is a plain HTML page (e.g. a CMS widget, a WordPress 
 
 ```bash
 # from the monorepo root
-pnpm --filter @delphi/webrtc-sdk build:browser
+pnpm --filter @kefir/telphi-sdk build:browser
 
 # or from inside packages/webrtc-sdk
 node build.browser.mjs
@@ -213,7 +213,7 @@ Outputs:
 You can also set config programmatically (useful for server-side values loaded after hydration):
 
 ```ts
-import { useWebRTCSdkStore } from "@delphi/webrtc-sdk";
+import { useWebRTCSdkStore } from "@kefir/telphi-sdk";
 
 useWebRTCSdkStore.getState().setWebRTCConfig({
   apiDomain: "api.example.com",
@@ -229,7 +229,7 @@ useWebRTCSdkStore.getState().setWebRTCConfig({
 The SDK exposes a simple intent-based call API. Your application sets a `pendingCall`; the phone UI handles the rest.
 
 ```ts
-import { useWebRTCSdkStore } from "@delphi/webrtc-sdk";
+import { useWebRTCSdkStore } from "@kefir/telphi-sdk";
 
 // From a React component
 const initiateCall = useWebRTCSdkStore((state) => state.initiateCall);
@@ -250,7 +250,7 @@ If your app uses a client-side router pass `onNavigate` to `<WebRTCPhone>` so th
 
 ```tsx
 import { useRouter } from "next/navigation";
-import { WebRTCPhone } from "@delphi/webrtc-sdk";
+import { WebRTCPhone } from "@kefir/telphi-sdk";
 
 export function PhoneContainer() {
   const router = useRouter();
@@ -267,7 +267,7 @@ export function PhoneContainer() {
 #### `<WebRTCConfigInit>`
 
 ```tsx
-import { WebRTCConfigInit } from "@delphi/webrtc-sdk";
+import { WebRTCConfigInit } from "@kefir/telphi-sdk";
 
 <WebRTCConfigInit apiDomain="api.example.com" apiKey="my-key" preferPcma={true} />;
 ```
@@ -279,7 +279,7 @@ Client component. Writes config into `useWebRTCSdkStore` on mount and whenever p
 #### `<WebRTCPhone>`
 
 ```tsx
-import { WebRTCPhone } from "@delphi/webrtc-sdk";
+import { WebRTCPhone } from "@kefir/telphi-sdk";
 
 <WebRTCPhone onNavigate={(path) => router.push(path)} />;
 ```
@@ -299,7 +299,7 @@ Client component. Renders a floating action button (minimized state) and a full-
 The primary integration point. Use this store to configure the SDK and trigger calls.
 
 ```ts
-import { useWebRTCSdkStore } from "@delphi/webrtc-sdk";
+import { useWebRTCSdkStore } from "@kefir/telphi-sdk";
 
 const {
   webrtcConfig, // WebRTCConfig — current runtime config
@@ -315,7 +315,7 @@ const {
 Exposes internal phone state for advanced use cases (e.g. displaying call duration in a custom HUD, reading connection status).
 
 ```ts
-import { useWebRTCPhoneStore } from "@delphi/webrtc-sdk";
+import { useWebRTCPhoneStore } from "@kefir/telphi-sdk";
 
 const { callState, callDuration, isMuted } = useWebRTCPhoneStore();
 ```
@@ -332,7 +332,7 @@ import type {
   WebRTCPhoneProps, // Props for <WebRTCPhone>
   PersistedCallState, // Stored across reconnections
   CallTokenResponse, // API response shape for call token endpoint
-} from "@delphi/webrtc-sdk";
+} from "@kefir/telphi-sdk";
 ```
 
 ---
@@ -342,7 +342,7 @@ import type {
 For building a fully custom phone UI without the MUI components:
 
 ```ts
-import { useSendMessage, useCleanupCall, useCallChannel } from "@delphi/webrtc-sdk";
+import { useSendMessage, useCleanupCall, useCallChannel } from "@kefir/telphi-sdk";
 ```
 
 | Hook             | Description                                                            |
@@ -363,7 +363,7 @@ import {
   setAudioCodecPreferences, // Modify SDP to prefer PCMA/Opus
   logDebug, // Internal scoped logger
   randomString, // Crypto-safe random string generator
-} from "@delphi/webrtc-sdk";
+} from "@kefir/telphi-sdk";
 ```
 
 ---
@@ -371,7 +371,7 @@ import {
 ## Architecture
 
 ```
-@delphi/webrtc-sdk
+@kefir/telphi-sdk
 ├── src/
 │   ├── WebRTCPhone.tsx         # Full phone UI (MUI dialog + FAB)
 │   ├── WebRTCConfigInit.tsx    # Config initializer component

@@ -1,5 +1,5 @@
 import { DTMF_FREQUENCIES } from './constants'
-import { logger } from './logger'
+import { logger } from './sdkLogger'
 
 // Audio context for DTMF tones (lazy initialized)
 let audioContext: AudioContext | null = null

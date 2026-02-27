@@ -32,9 +32,8 @@ import {
     Tooltip,
 } from '@mui/material'
 
-import type { ActionHandler } from '@delphi/webrtc-sdk'
+import type { ActionHandler, useCallChannel } from './channel/useCallChannel'
 import {
-    useCallChannel,
     useSendMessage,
     useMakeCall,
     useCleanupCall,
@@ -44,11 +43,10 @@ import {
     useInitJanus,
     useSendDtmf,
     useSelectionTracking,
-    useWebRTCPhoneStore,
-    webrtcRefs,
-} from '@delphi/webrtc-sdk'
-
+} from './hooks'
 import { useBrowserAction } from './hooks/useBrowserAction'
+import { useWebRTCPhoneStore } from './stores/webrtcPhoneStore'
+import { webrtcRefs } from './stores/webrtcRefsStore'
 import { animationStyles, logDebug, saveCallState, loadCallState, clearCallState } from './utils'
 
 interface WebRTCPhoneProps {

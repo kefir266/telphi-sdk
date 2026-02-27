@@ -1,5 +1,5 @@
 /**
- * Browser entrypoint for @delphi/webrtc-sdk.
+ * Browser entrypoint for @kefir/telphi-sdk.
  *
  * Compiled to a self-contained IIFE (including React + MUI) by build.browser.mjs.
  * Exposes the global `window.DelphiWebRTC` object.
